@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anna Drapeza - Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #2b2727;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow: hidden;
+    }
+
+    /* 3x2 Fullscreen Grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      gap: 0;
+    }
+
+    .tile {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: block;
+      text-decoration: none;
+      background-color: #2b2727;
+    }
+
+    /* Slow & smooth reveal animation */
+    .photo-tile {
+      opacity: 0;
+      transform: scale(0.97);
+      transition: opacity 1.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                  transform 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .photo-tile.is-revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Image layer */
+    .tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    /* Dimmed transparent overlay */
+    .tile-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(43, 39, 39, 0.88);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 2;
+      padding: 24px;
+    }
+
+    /* Title text styling */
+    .tile-title {
+      color: #ffffff;
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: 0;
+      text-align: center;
+      transition: transform 0.4s ease;
+      transform: translateY(6px);
+      user-select: none;
+    }
+
+    /* Hover interactions once revealed */
+    .photo-tile.is-revealed:hover img {
+      transform: scale(1.03);
+    }
+
+    .photo-tile.is-revealed:hover .tile-overlay {
+      opacity: 1;
+    }
+
+    .photo-tile.is-revealed:hover .tile-title {
+      transform: translateY(0);
+    }
+
+    /* Top-Right Logo Tile */
+    .logo-tile {
+      background-color: #2b2727;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 3;
+    }
+
+    .logo-tile img {
+      max-width: 240px;
+      width: 70%;
+      height: auto;
+      object-fit: contain;
+      transition: opacity 0.3s ease;
+    }
+
+    .logo-tile:hover img {
+      opacity: 0.75;
+      transform: none;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      html, body {
+        overflow-y: auto;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        height: auto;
+      }
+
+      .tile {
+        height: 50vh;
+        min-height: 280px;
+      }
+
+      .tile-overlay {
+        opacity: 1;
+        background-color: rgba(43, 39, 39, 0.65);
+      }
+
+      .tile-title {
+        transform: translateY(0);
+        font-size: 1.05rem;
+      }
+
+      .logo-tile {
+        order: -1;
+        height: 35vh;
+        min-height: 200px;
+      }
+
+      .logo-tile img {
+        max-width: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="gallery-grid">
+    <!-- Top Row -->
+    <a href="gallery1.html" class="tile photo-tile">
+      <img src="photo1.jpg" alt="Photo 1">
+      <div class="tile-overlay">
+        <span class="tile-title" data-title-key="Title 1"></span>
+      </div>
+    </a>
+
+    <a href="gallery2.html" class="tile photo-tile">
+      <img src="photo2.jpg" alt="Photo 2">
+      <div class="tile-overlay">
+        <span class="tile-title" data-title-key="Title 2"></span>
+      </div>
+    </a>
+
+    <!-- Top-Right Logo Tile -->
+    <a href="index.html" class="tile logo-tile" aria-label="Home">
+      <img src="logo.png" alt="Anna Drapeza Logo">
+    </a>
+
+    <!-- Bottom Row -->
+    <a href="gallery3.html" class="tile photo-tile">
+      <img src="photo3.jpg" alt="Photo 3">
+      <div class="tile-overlay">
+        <span class="tile-title" data-title-key="Title 3"></span>
+      </div>
+    </a>
+
+    <a href="gallery4.html" class="tile photo-tile">
+      <img src="photo4.jpg" alt="Photo 4">
+      <div class="tile-overlay">
+        <span class="tile-title" data-title-key="Title 4"></span>
+      </div>
+    </a>
+
+    <a href="gallery5.html" class="tile photo-tile">
+      <img src="photo5.jpg" alt="Photo 5">
+      <div class="tile-overlay">
+        <span class="tile-title" data-title-key="Title 5"></span>
+      </div>
+    </a>
+  </main>
+
+  <!-- 1. Load the titles file -->
+  <script src="titles.js"></script>
+
+  <!-- 2. Populate titles & trigger reveal -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Insert titles from titles.js into the tiles
+      if (typeof TITLES !== 'undefined') {
+        document.querySelectorAll('[data-title-key]').forEach(el => {
+          const key = el.getAttribute('data-title-key');
+          if (TITLES[key]) {
+            el.textContent = TITLES[key];
+          }
+        });
+      }
+
+      // Random slow reveal animation
+      const photoTiles = Array.from(document.querySelectorAll('.photo-tile'));
+
+      for (let i = photoTiles.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [photoTiles[i], photoTiles[j]] = [photoTiles[j], photoTiles[i]];
+      }
+
+      const startDelay = 600;
+      const intervalDelay = 650;
+
+      photoTiles.forEach((tile, index) => {
+        setTimeout(() => {
+          tile.classList.add('is-revealed');
+        }, startDelay + (index * intervalDelay));
+      });
+    });
+  </script>
+
+</body>
+</html>

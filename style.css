@@ -1,0 +1,241 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #2b2727;
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow: hidden;
+}
+
+/* Fullscreen split container */
+.gallery-container {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* --- LEFT SIDE: 30% FIXED SIDEBAR --- */
+.sidebar {
+  width: 30vw;
+  min-width: 30vw;
+  max-width: 30vw;
+  flex: 0 0 30vw;
+  height: 100%;
+  background-color: #2b2727;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 48px 36px 40px;
+  z-index: 10;
+  position: relative;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Top Link */
+.sidebar-top {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.category-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 200;
+  transition: opacity 0.25s ease;
+}
+
+.category-link:hover {
+  opacity: 0.7;
+}
+
+/* Center Content */
+.sidebar-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 34px;
+  width: 100%;
+  margin-top: 45px;
+  margin-bottom: auto;
+  flex-shrink: 0;
+}
+
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.25s ease;
+  text-decoration: none;
+  width: 100%;
+}
+
+.brand-link img {
+  max-width: 240px;
+  width: 60%;
+  height: auto;
+  display: block;
+}
+
+.brand-link:hover {
+  opacity: 0.75;
+}
+
+/* Project Title */
+.project-title {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  user-select: none;
+  margin-top: 18px;
+}
+
+/* Project Description & Links */
+.project-description {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.8rem;
+  font-weight: 300;
+  line-height: 1.55;
+  letter-spacing: 0.04em;
+  text-align: left;
+  max-width: 340px;
+  width: 100%;
+  margin: 0;
+}
+
+.project-description a {
+  color: #70b8ff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.25s ease;
+}
+
+.project-description a:hover {
+  color: #ffffff;
+}
+
+/* Bottom Social Buttons */
+.social-links {
+  display: flex;
+  gap: 32px;
+  margin-top: 24px;
+  flex-shrink: 0;
+}
+
+.circle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  transition: all 0.25s ease;
+}
+
+.circle-btn:hover {
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
+}
+
+/* --- RIGHT SIDE: 70% SCROLLING STREAM --- */
+.photos-stream {
+  width: 70vw;
+  min-width: 0; /* MANDATORY: prevents wide images from stretching flex container */
+  max-width: 70vw;
+  flex: 0 0 70vw;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.photos-stream::-webkit-scrollbar {
+  display: none;
+}
+
+.photo-item {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+}
+
+.photo-item img,
+.photo-item video {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 900px) {
+  html, body {
+    overflow-y: auto;
+  }
+
+  .gallery-container {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    flex: none;
+    height: auto;
+    padding: 50px 24px 40px;
+    overflow-y: visible;
+  }
+
+  .photos-stream {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    flex: none;
+    height: auto;
+    overflow: visible;
+  }
+
+  .brand-link img {
+    max-width: 240px;
+  }
+}

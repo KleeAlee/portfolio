@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anna Drapeza - Graphic Design</title>
+<!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background-color: #2b2727;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      overflow-y: auto; /* Enables smooth scrolling down for 25+ tiles */
+    }
+
+    /* 3 Columns Grid with 50vh height per row (First screen = exactly 2 rows = 6 tiles) */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 50vh;
+      grid-auto-rows: 50dvh;
+      width: 100vw;
+      gap: 0;
+    }
+
+    .tile {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: block;
+      text-decoration: none;
+      background-color: #2b2727;
+    }
+
+    /* Reveal animation */
+    .photo-tile {
+      opacity: 0;
+      transform: scale(0.97);
+      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
+                  transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .photo-tile.is-revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Image layer */
+    .tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    /* Dimmed overlay */
+    .tile-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(43, 39, 39, 0.88);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 2;
+      padding: 24px;
+    }
+
+    /* Title text */
+    .tile-title {
+      color: #ffffff;
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: 0;
+      text-align: center;
+      transition: transform 0.4s ease;
+      transform: translateY(6px);
+      user-select: none;
+    }
+
+    /* Hover interactions */
+    .photo-tile.is-revealed:hover img {
+      transform: scale(1.03);
+    }
+
+    .photo-tile.is-revealed:hover .tile-overlay {
+      opacity: 1;
+    }
+
+    .photo-tile.is-revealed:hover .tile-title {
+      transform: translateY(0);
+    }
+
+    /* Top-Left Logo Tile */
+    .logo-tile {
+      background-color: #2b2727;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 3;
+    }
+
+    .logo-tile img {
+      max-width: 240px;
+      width: 70%;
+      height: auto;
+      object-fit: contain;
+      transition: opacity 0.3s ease;
+    }
+
+    .logo-tile:hover img {
+      opacity: 0.75;
+      transform: none;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 50vh;
+      }
+
+      .tile-overlay {
+        opacity: 1;
+        background-color: rgba(43, 39, 39, 0.65);
+      }
+
+      .tile-title {
+        transform: translateY(0);
+        font-size: 1.05rem;
+      }
+
+      .logo-tile {
+        height: 35vh;
+        min-height: 200px;
+      }
+
+      .logo-tile img {
+        max-width: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="gallery-grid">
+    <!-- Top-Left Logo Tile (Position 1) -->
+    <a href="index.html" class="tile logo-tile" aria-label="Home">
+      <img src="logo.png" alt="Anna Drapeza Logo">
+    </a>
+
+    <!-- First Screen Tiles (5 Design Tiles + 1 Logo = 6 Tiles on screen) -->
+      <a href="gallery-design27.html" class="tile photo-tile">
+      <img src="design27.jpg" alt="Design 27">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 27"></span></div>
+    </a><a href="gallery-design25.html" class="tile photo-tile">
+      <img src="design25.jpg" alt="Design 25">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 25"></span></div>
+    </a>
+<a href="gallery-design22.html" class="tile photo-tile">
+      <img src="design22.jpg" alt="Design 22">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 22"></span></div>
+    </a>
+
+
+    <a href="gallery-design2.html" class="tile photo-tile">
+      <img src="design2.jpg" alt="Design 2">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 2"></span></div>
+    </a> 
+<a href="gallery-design4.html" class="tile photo-tile">
+      <img src="design4.jpg" alt="Design 4">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 4"></span></div>
+    </a>
+
+    
+
+
+ 
+
+    <!-- Subsequent Tiles (Revealed as you scroll down) -->
+   
+   <a href="gallery-design3.html" class="tile photo-tile">
+      <img src="design3.jpg" alt="Design 3">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 3"></span></div>
+    </a>
+<a href="gallery-design5.html" class="tile photo-tile">
+      <img src="design5.jpg" alt="Design 5">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 5"></span></div>
+    </a>
+    <a href="gallery-design1.html" class="tile photo-tile">
+      <img src="design1.jpg" alt="Design 1">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 1"></span></div>
+    </a>
+<a href="gallery-design6.html" class="tile photo-tile">
+      <img src="design6.jpg" alt="Design 6">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 6"></span></div>
+    </a>
+
+    <a href="gallery-design7.html" class="tile photo-tile">
+      <img src="design7.jpg" alt="Design 7">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 7"></span></div>
+    </a>
+
+    <a href="gallery-design8.html" class="tile photo-tile">
+      <img src="design8.jpg" alt="Design 8">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 8"></span></div>
+    </a>
+<a href="gallery-design10.html" class="tile photo-tile">
+      <img src="design10.jpg" alt="Design 10">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 10"></span></div>
+    </a>
+
+    <a href="gallery-design9.html" class="tile photo-tile">
+      <img src="design9.jpg" alt="Design 9">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 9"></span></div>
+    </a>
+
+    
+
+    <a href="gallery-design11.html" class="tile photo-tile">
+      <img src="design11.jpg" alt="Design 11">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 11"></span></div>
+    </a>
+
+    <a href="gallery-design12.html" class="tile photo-tile">
+      <img src="design12.jpg" alt="Design 12">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 12"></span></div>
+    </a>
+
+    <a href="gallery-design13.html" class="tile photo-tile">
+      <img src="design13.jpg" alt="Design 13">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 13"></span></div>
+    </a>
+
+    <a href="gallery-design14.html" class="tile photo-tile">
+      <img src="design14.jpg" alt="Design 14">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 14"></span></div>
+    </a>
+
+    <a href="gallery-design15.html" class="tile photo-tile">
+      <img src="design15.jpg" alt="Design 15">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 15"></span></div>
+    </a>
+
+    <a href="gallery-design16.html" class="tile photo-tile">
+      <img src="design16.jpg" alt="Design 16">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 16"></span></div>
+    </a>
+
+    <a href="gallery-design17.html" class="tile photo-tile">
+      <img src="design17.jpg" alt="Design 17">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 17"></span></div>
+    </a>
+
+   
+
+    <a href="gallery-design19.html" class="tile photo-tile">
+      <img src="design19.jpg" alt="Design 19">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 19"></span></div>
+    </a>
+
+    <a href="gallery-design20.html" class="tile photo-tile">
+      <img src="design20.jpg" alt="Design 20">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 20"></span></div>
+    </a>
+
+    <a href="gallery-design21.html" class="tile photo-tile">
+      <img src="design21.jpg" alt="Design 21">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 21"></span></div>
+    </a>
+
+   
+
+    <a href="gallery-design23.html" class="tile photo-tile">
+      <img src="design23.jpg" alt="Design 23">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 23"></span></div>
+    </a><a href="gallery-design26.html" class="tile photo-tile">
+      <img src="design26.jpg" alt="Design 26">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 26"></span></div>
+    </a>
+<a href="gallery-design24.html" class="tile photo-tile">
+      <img src="design24.jpg" alt="Design 24">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 24"></span></div>
+    </a>
+ <a href="gallery-design18.html" class="tile photo-tile">
+      <img src="design18.jpg" alt="Design 18">
+      <div class="tile-overlay"><span class="tile-title" data-title-key="Design 18"></span></div>
+    </a> 
+<a href="index.html" class="tile logo-tile" aria-label="Home">
+      <img src="logo.png" alt="Anna Drapeza Logo">
+    </a>
+
+
+  </main>
+
+  <!-- 1. Load the titles file -->
+  <script src="titles-design.js"></script>
+
+  <!-- 2. Populate titles and run animations -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Populate titles from titles-design.js
+      if (typeof DESIGN_TITLES !== 'undefined') {
+        document.querySelectorAll('[data-title-key]').forEach(el => {
+          const key = el.getAttribute('data-title-key');
+          if (DESIGN_TITLES[key]) {
+            el.textContent = DESIGN_TITLES[key];
+          }
+        });
+      }
+
+      const photoTiles = Array.from(document.querySelectorAll('.photo-tile'));
+
+      // First screen: the first 5 tiles visible on load
+      const initialTiles = photoTiles.slice(0, 5);
+      const remainingTiles = photoTiles.slice(5);
+
+      // Randomize entrance order for the first screen tiles
+      for (let i = initialTiles.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [initialTiles[i], initialTiles[j]] = [initialTiles[j], initialTiles[i]];
+      }
+
+      initialTiles.forEach((tile, index) => {
+        setTimeout(() => {
+          tile.classList.add('is-revealed');
+        }, 500 + (index * 450));
+      });
+
+      // Smoothly reveal remaining tiles as you scroll down
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      remainingTiles.forEach(tile => observer.observe(tile));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anna Drapeza</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      background-color: #2b2727;
+      color: #ffffff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 60px;
+      overflow-x: hidden;
+    }
+
+    /* --- FULLSCREEN HOVER BACKGROUNDS --- */
+    .bg-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.45s ease, visibility 0.45s ease;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .bg-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    #bg-photographer {
+      background-image: url('picture1.jpg');
+    }
+
+    #bg-designer {
+      background-image: url('picture2.jpg');
+    }
+
+    .bg-image.is-active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* --- CONTENT WRAPPERS --- */
+    .main-nav, .social-links {
+      position: relative;
+      z-index: 2;
+    }
+
+    .main-nav {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Desktop Ordering */
+    .link-photographer {
+      order: 1;
+    }
+
+    /* Image Logo Link */
+    .brand-link {
+      order: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.25s ease;
+      user-select: none;
+    }
+
+    .brand-link img {
+      max-width: 280px;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .brand-link:hover {
+      opacity: 0.8;
+    }
+
+    .link-designer {
+      order: 3;
+    }
+
+    .nav-link {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      font-weight: 200;
+      transition: opacity 0.25s ease, text-shadow 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
+      opacity: 0.85;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Social icons */
+    .social-links {
+      display: flex;
+      gap: 36px;
+      margin-top: 55px;
+    }
+
+    .circle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 50%;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(2px);
+    }
+
+    .circle-btn:hover {
+      border-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.15);
+      transform: scale(1.05);
+    }
+
+    /* --- MOBILE VERSION --- */
+    @media (max-width: 768px) {
+      .main-nav {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Mobile Order: Logo (1) -> Photographer (2) -> Designer (3) */
+      .brand-link {
+        order: 1;
+        margin-bottom: 70px;
+      }
+
+      .brand-link img {
+        max-width: 250px;
+      }
+
+      .link-photographer {
+        order: 2;
+        margin-bottom: 22px;
+      }
+
+      .link-designer {
+        order: 3;
+      }
+
+      .nav-link {
+        font-size: 0.82rem;
+        letter-spacing: 0.22em;
+        text-align: center;
+      }
+
+      .social-links {
+        margin-top: 75px;
+        gap: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fullscreen Background Elements -->
+  <div id="bg-photographer" class="bg-image"></div>
+  <div id="bg-designer" class="bg-image"></div>
+
+  <!-- Navigation Content -->
+  <div class="main-nav">
+    <a href="photo.html" class="nav-link link-photographer" data-target-bg="bg-photographer">Photographer</a>
+
+    <a href="#home" class="brand-link">
+      <img src="logo.png" alt="Anna Drapeza Logo">
+    </a>
+
+    <a href="design.html" class="nav-link link-designer" data-target-bg="bg-designer">Graphic Designer</a>
+  </div>
+
+  <div class="social-links">
+    <a href="https://www.behance.net/annadrapeza" target="_blank" rel="noopener noreferrer" class="circle-btn" aria-label="Behance">Be</a>
+    <a href="https://www.linkedin.com/in/annadrapeza/" target="_blank" rel="noopener noreferrer" class="circle-btn" aria-label="LinkedIn">In</a>
+  </div>
+
+  <script>
+    const hoverLinks = document.querySelectorAll('[data-target-bg]');
+
+    hoverLinks.forEach(link => {
+      const targetId = link.getAttribute('data-target-bg');
+      const targetBg = document.getElementById(targetId);
+
+      link.addEventListener('mouseenter', () => {
+        if (targetBg) targetBg.classList.add('is-active');
+      });
+
+      link.addEventListener('mouseleave', () => {
+        if (targetBg) targetBg.classList.remove('is-active');
+      });
+    });
+  </script>
+
+</body>
+</html>
