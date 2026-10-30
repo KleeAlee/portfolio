@@ -139,6 +139,12 @@
   transform: translateX(-12px); /* Adjust: -8px to -16px until it feels visually centered */
 
     }
+/* 2. Mobile screen reset: perfect dead-center */
+@media (max-width: 768px) {
+  .social-links {
+    transform: none; /* Resets offset back to center on phones/tablets */
+  }
+}
 
     .circle-btn {
       display: flex;
