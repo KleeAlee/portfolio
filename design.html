@@ -136,10 +136,15 @@
     }
 
     /* Responsive adjustments */
-    @media (max-width: 768px) {
+    @media (max-width: 768px)  {
+      html, body {
+        overflow-y: auto;
+      }
+
       .gallery-grid {
         grid-template-columns: 1fr;
-        grid-auto-rows: 50vh;
+        grid-template-rows: auto;
+        height: auto;
       }
 	.tile {
         height: 50vh;
