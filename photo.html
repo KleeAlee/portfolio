@@ -138,7 +138,9 @@
       html, body {
         overflow-y: auto;
       }
-
+.photo-tile {
+    transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+                transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
       .gallery-grid {
         grid-template-columns: 1fr;
         grid-template-rows: auto;
@@ -162,8 +164,9 @@
 
       .logo-tile {
         order: -1;
-        height: 35vh;
-        min-height: 200px;
+        height: 24vh;         
+    min-height: 140px;    
+    padding: 16px 24px;  
       }
 
       .logo-tile img {
@@ -218,40 +221,74 @@
     </a>
   </main>
 
+  
   <!-- 1. Load the titles file -->
-  <script src="titles.js"></script>
+  <script src="titles-design.js"></script>
 
-  <!-- 2. Populate titles & trigger reveal -->
+  <!-- 2. Populate titles and responsive reveal -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
-      // Insert titles from titles.js into the tiles
-      if (typeof TITLES !== 'undefined') {
+      // 1. Populate titles from titles-design.js
+      if (typeof DESIGN_TITLES !== 'undefined') {
         document.querySelectorAll('[data-title-key]').forEach(el => {
           const key = el.getAttribute('data-title-key');
-          if (TITLES[key]) {
-            el.textContent = TITLES[key];
+          if (DESIGN_TITLES[key]) {
+            el.textContent = DESIGN_TITLES[key];
           }
         });
       }
 
-      // Random slow reveal animation
       const photoTiles = Array.from(document.querySelectorAll('.photo-tile'));
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-      for (let i = photoTiles.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [photoTiles[i], photoTiles[j]] = [photoTiles[j], photoTiles[i]];
+      if (isMobile) {
+        // --- MOBILE: Sequential, one-by-one reveal on scroll ---
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '0px 0px -40px 0px'
+        });
+
+        photoTiles.forEach(tile => observer.observe(tile));
+
+      } else {
+        // --- DESKTOP: First screen random reveal, scroll observer for the rest ---
+        const initialTiles = photoTiles.slice(0, 5);
+        const remainingTiles = photoTiles.slice(5);
+
+        // Shuffle initial visible tiles
+        for (let i = initialTiles.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [initialTiles[i], initialTiles[j]] = [initialTiles[j], initialTiles[i]];
+        }
+
+        initialTiles.forEach((tile, index) => {
+          setTimeout(() => {
+            tile.classList.add('is-revealed');
+          }, 450 + (index * 350));
+        });
+
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.15,
+          rootMargin: '0px 0px -50px 0px'
+        });
+
+        remainingTiles.forEach(tile => observer.observe(tile));
       }
-
-      const startDelay = 600;
-      const intervalDelay = 650;
-
-      photoTiles.forEach((tile, index) => {
-        setTimeout(() => {
-          tile.classList.add('is-revealed');
-        }, startDelay + (index * intervalDelay));
-      });
     });
   </script>
-
 </body>
 </html>
